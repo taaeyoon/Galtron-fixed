@@ -5,10 +5,10 @@
 | Jeongkyu Shin | Instructor |     |
 | Jaewoo Yang   | Student    |     |
 | JK            | Student    |     |
-| Keunmo Koo		| Genius		 |		 |
+| Keunmo Koo	| Genius     |     |
 
 # Galtron
-A simple 2D shooter made with pygame, written in python...
+A simple 2D shooter made with pygame, written in python..
 
 Props to Python Crash Course for the awesome tut. Although i did add a little extra, was more of just a learning curve sort of thing and to learn more about python. Input welcome by anyone.
 
