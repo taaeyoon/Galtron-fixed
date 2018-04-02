@@ -37,7 +37,7 @@
 | JaeHun Lee    | Student    |     |
 | Taewan Park   | Student    |     |
 | Sungho Yun    | Student    |     |
-| Keunmo Koo	  | Genius     |     |
+| Keunmo Koo	| Genius     |     |
 
 
 # Galtron
