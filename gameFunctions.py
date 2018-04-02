@@ -55,13 +55,14 @@ def checkKeydownEvents(event, setting, screen, stats, sb, playBtn, quitBtn, sel,
 	elif event.key == pg.K_LEFT:
 		#Move the ship left
 		ship.movingLeft = True
-	elif event.key == pg.K_LCTRL:
+	elif event.key == pg.K_SPACE:
 		newBullet = Bullet(setting, screen, ship)
 		bullets.add(newBullet)
 	#Check for pause key
 	elif event.key == pg.K_p:
 		pause(stats)
 	elif event.key == pg.K_ESCAPE:
+               
 		#Quit game
 		sys.exit()
 
