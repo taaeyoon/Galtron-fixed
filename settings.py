@@ -5,8 +5,10 @@ class Settings():
 	def __init__(self):
 		"""Initialize the class"""
 		self.windowCaption = 'Galtron'
-		self.screenWidth = 450
-		self.screenHeight = 550
+		#issue 113 start.
+		self.screenWidth = 800	#origin450
+		self.screenHeight = 700	#origin550
+		#issue 113 fixed
 		self.bgColor = (20, 20, 20)
 		self.bg = pg.image.load("gfx/background.bmp")
 
@@ -27,10 +29,10 @@ class Settings():
 		self.initDynamicSettings()
 
 	def initDynamicSettings(self):
-		self.shipSpeed = 1.5
-		self.bulletSpeed = 3
-		self.alienSpeed = 1
-		self.fleetDropSpeed = 5
+		self.shipSpeed = 0.7	#issue 119 fixed. origin1.5
+		self.bulletSpeed = 3	#origin 3
+		self.alienSpeed = 1		#origin 1
+		self.fleetDropSpeed = 5	#origin 5
 		self.fleetDir = 1
 		self.alienPoints = 50
 
