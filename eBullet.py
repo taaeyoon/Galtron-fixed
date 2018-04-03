@@ -9,7 +9,7 @@ class EBullet(Sprite):
 		self.screen = screen
 
 		#load the bullet image and set its rect attribute
-		self.image = pg.image.load('gfx/ebullet.bmp')
+		self.image = pg.image.load('gfx/ebullet_colorchange.bmp')
 		self.rect = self.image.get_rect()
 
 		#Create a collision mask

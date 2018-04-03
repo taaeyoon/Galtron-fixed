@@ -48,7 +48,7 @@ def checkEvents(setting, screen, stats, sb, playBtn, twoPlayBtn, aboutBtn, quitB
 def prepTitle(setting, screen):
 	#Font settings for scoring information
 	global image, rect
-	image = pg.image.load('gfx/title.png')
+	image = pg.image.load('gfx/title(2).png')
 	rect = image.get_rect()
 
 
