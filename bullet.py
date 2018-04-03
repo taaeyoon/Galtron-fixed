@@ -23,9 +23,6 @@ class Bullet(Sprite):
 		self.color = setting.bulletColor
 		self.bulletSpeed = setting.bulletSpeed
 
-		
-		
-
 
 	def update(self):
 		"""Move the bullet -y up the screen"""

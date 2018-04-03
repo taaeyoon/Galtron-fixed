@@ -18,7 +18,6 @@ from scoreboard import Scoreboard #Score board for points, high score, lives, le
 
 
 
-
 def runGame():
 	#Initialize game and create a window
 	pg.init()
@@ -53,18 +52,14 @@ def runGame():
 	#make a group of bullets to store
 	bullets = Group()
 	eBullets = Group()
-	
 
 	#Make an alien
 	aliens = Group()
 	gf.createFleet(setting, screen, ship, aliens)
 	pg.display.set_icon(pg.transform.scale(ship.image, (32, 32)))
 
-
-	
-	
-	
 	runGame = True
+
 	#Set the two while loops to start mainMenu first
 	while runGame:
 		#Set to true to run main game loop
