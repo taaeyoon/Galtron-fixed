@@ -3,6 +3,7 @@ import pygame as pg
 from time import sleep
 from bullet import Bullet, SpecialBullet
 from alien import Alien
+from item import Item
 from settings import Settings
 import random
 import sounds
@@ -396,7 +397,7 @@ def UltimateDiamondShape(setting, screen, stats, sbullets):
 
 def useUltimate(setting, screen, stats, sbullets, pattern):
 	if stats.ultimateGauge != 100:
-		return 
+		return
 	if pattern == 1:
 		sounds.ult_attack.play()
 		UltimateDiamondShape(setting, screen, stats, sbullets)
