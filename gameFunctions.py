@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import sys, time
-import pygame as pg
-from time import sleep
-from bullet import Bullet, SpecialBullet
-from alien import Alien
-from item import Item
-from settings import Settings
-=======
->>>>>>> a785b79fd5422e6f83f19dc98c05fbde172c18a5
 import random
 import sys
 
