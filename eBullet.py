@@ -14,7 +14,7 @@ class EBullet(Sprite):
 
 		#Create a collision mask
 		self.mask = pg.mask.from_surface(self.image)
-		
+
 		#Create a bullet rect at (0,0)
 		##self.rect = pg.Rect(0, 0, setting.bulletWidth, setting.bulletHeight)
 		self.rect.centerx = alien.rect.centerx
@@ -24,7 +24,7 @@ class EBullet(Sprite):
 		self.y = float(self.rect.y)
 
 		self.color = setting.bulletColor
-		self.bulletSpeed = setting.bulletSpeed / 2
+		self.bulletSpeed = setting.bulletSpeed * 0.7
 
 
 	def update(self):

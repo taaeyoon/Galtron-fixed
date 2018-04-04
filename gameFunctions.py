@@ -189,6 +189,13 @@ def createAlien(setting, screen, aliens, alienNumber, rowNumber):
 	aliens.add(alien)
 
 
+def createItem(setting, screen, items, alienpos):
+	items = Item(setting, screen)
+	screenRect = item.screen.get_rect()
+	alienpos = alien.rect.centerx
+	items.add(item)
+
+
 def createFleet(setting, screen, ship, aliens):
 	"""Create a fleet of aliens"""
 	alien = Alien(setting, screen)
@@ -295,6 +302,8 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
 		for aliens in collisions.values():
 			stats.score += setting.alienPoints * len(aliens)
 		checkHighScore(stats, sb)
+
+
 	sb.prepScore()
 	#Check if there are no more aliens
 	if len(aliens) == 0:
@@ -321,6 +330,15 @@ def checkEBulletShipCol(setting, stats, sb, screen, ship, aliens, bullets, eBull
 			shipHit(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
 			sb.prepShips()
 			eBullets.empty()
+
+
+def checkItemShipCol(setting, stats, sb, screen, ship, aliens, bullets, items):
+	"""Check for collisions using collision mask between ship and enemy bullets"""
+	for items in items.sprites():
+		if pg.sprite.collide_mask(ship, item):
+			shipHit(setting, stats, sb, screen, ship, aliens, bullets, items)
+			self.shipSpeed *= 1.7
+			items.empty()
 
 
 def checkHighScore(stats, sb):

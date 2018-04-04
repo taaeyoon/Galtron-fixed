@@ -23,6 +23,10 @@ class Settings():
 		self.bulletHeight = 15
 		self.bulletColor = (60, 60, 60)
 
+		#Item Settings
+		self.itemWidth = 30
+		self.itemHeight = 30
+
 		#Alien settings
 
 		#How quickly the game speeds up
@@ -55,9 +59,9 @@ class Settings():
 
 	def initDynamicSettings(self):
 
-		self.shipSpeed = 1.5
-		self.bulletSpeed = 4
-		self.alienSpeed = 1
+		self.shipSpeed = 5
+		self.bulletSpeed = 10
+		self.alienSpeed = 3
 		self.fleetDropSpeed = 5
 		self.fleetDir = 1
 		self.alienPoints = 10
