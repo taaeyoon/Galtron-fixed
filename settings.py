@@ -33,6 +33,10 @@ class Settings():
 		self.itemWidth = 30
 		self.itemHeight = 30
 
+		#Item Settings
+		self.itemWidth = 30
+		self.itemHeight = 30
+
 		#Alien settings
 
 		#How quickly the game speeds up

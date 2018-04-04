@@ -224,6 +224,13 @@ def createItem(setting, screen, pos, type):
 	items.add(item)
 
 
+def createItem(setting, screen, items, alienpos):
+	items = Item(setting, screen)
+	screenRect = item.screen.get_rect()
+	alienpos = alien.rect.centerx
+	items.add(item)
+
+
 def createFleet(setting, screen, ship, aliens):
 	"""Create a fleet of aliens"""
 	alien = Alien(setting, screen)
