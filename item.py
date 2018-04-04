@@ -5,7 +5,11 @@ from pygame.sprite import *
 class Item(Sprite):
 	"""A class to manage speed item droped from the alien"""
 
+<<<<<<< HEAD
 	def __init__(self, setting, screen, item):
+=======
+	def __init__(self, setting, screen, pos):
+>>>>>>> master
 		"""Create a item object at the aliens current position"""
 		super(Item, self).__init__()
 		self.screen = screen
