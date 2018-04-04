@@ -3,6 +3,7 @@ import pygame as pg
 from time import sleep
 from bullet import Bullet, SpecialBullet
 from alien import Alien
+from item import Item
 from settings import Settings
 import random
 import sounds
