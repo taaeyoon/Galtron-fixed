@@ -216,9 +216,9 @@ def createAlien(setting, screen, aliens, alienNumber, rowNumber):
 	alien.rect.y = (alien.rect.height + random.randrange(0,setting.screenHeight-alien.rect.height*2))/1.5
 	aliens.add(alien)
 
-
-def createItem(setting, screen, items, alienpos):
-	items = Item(setting, screen)
+"""add item func"""
+def createItem(setting, screen, pos, type):
+	item = Item(setting, screen, pos, type)
 	screenRect = item.screen.get_rect()
 	alienpos = alien.rect.centerx
 	items.add(item)
@@ -331,6 +331,7 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
 			stats.score += setting.alienPoints * len(aliens)
 		checkHighScore(stats, sb)
 
+		createItem(setting, screen, item, c.rect.center)
 
 	sb.prepScore()
 	#Check if there are no more aliens

@@ -57,6 +57,9 @@ def runGame():
 	ship1 = Ship(setting, screen)
 	ship2 = Ship(setting, screen)
 
+	#make a group of items to store
+	items = Group()
+
 	#make a group of bullets to store
 	bullets = Group()
 	eBullets = Group()
