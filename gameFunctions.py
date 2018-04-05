@@ -395,20 +395,6 @@ def checkEBulletShipCol(setting, stats, sb, screen, ship, aliens, bullets, eBull
 			eBullets.empty()
 
 
-# def checkItemShipCol(setting, stats, sb, screen, ship, aliens, items):
-# 	"""Check for collisions using collision mask between ship and enemy bullets"""
-# 	for item in items.sprites():
-# 		if pg.sprite.collide_mask(ship, item):
-# 			print("MEET!")
-# 			if item.type == 1:
-# 				self.shiplimit += 1
-# 				print("meet 1")
-# 			if item.type == 2:
-# 				self.shipSpeed *= 1.7
-# 				print("meet 2")
-# 			items.empty()
-
-
 def checkHighScore(stats, sb):
 	"""Check to see if high score has been broken"""
 	if stats.score > stats.highScore:

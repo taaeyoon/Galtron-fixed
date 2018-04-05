@@ -118,8 +118,4 @@ class Settings():
 	def shipspeedup(self):
 		starttime = pg.time.get_ticks()
 		self.shipSpeed *= 2.0
-		# while True:
-		# 	endtime = pg.time.get_ticks()
-		# 	if endtime - starttime > 10000:
-		# 		self.shipSpeed /= 2.0
-		# 		break
+	
