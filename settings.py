@@ -5,35 +5,35 @@ import utilityFunctions
 getReversedRGB = utilityFunctions.getReversedRGB
 
 class Settings():
-    """A class to store all settings for game"""
+	"""A class to store all settings for game"""
 
-    def __init__(self):
-        """Initialize the class"""
-        self.windowCaption = 'Galtron'
-        self.screenWidth = 550
-        self.screenHeight = 650
-        self.bgColor = (20, 20, 20)
-        self.image = pg.image.load("gfx/background.bmp")
-        self.image = pg.transform.scale(self.image, (self.screenWidth, self.screenHeight))
-        self.bg = self.image
-        # Ultimate settings
-        self.ultimateGaugeIncrement = 3
+	def __init__(self):
+		"""Initialize the class"""
+		self.windowCaption = 'Galtron'
+		self.screenWidth = 550
+		self.screenHeight = 650
+		self.bgColor = (20, 20, 20)
+		self.image = pg.image.load("gfx/background.bmp")
+		self.image = pg.transform.scale(self.image, (self.screenWidth, self.screenHeight))
+		self.bg = self.image
+		# Ultimate settings
+		self.ultimateGaugeIncrement = 3
 
-        # Ships speed
-        self.shipLimit = 5
+		# Ships speed
+		self.shipLimit = 5
 
-        # Bullet settings
-        self.bulletWidth = 3
-        self.bulletHeight = 15
-        self.bulletColor = (60, 60, 60)
+		# Bullet settings
+		self.bulletWidth = 3
+		self.bulletHeight = 15
+		self.bulletColor = (60, 60, 60)
 
-        # Alien settings
+		# Alien settings
 
-        # How quickly the game speeds up
+		# How quickly the game speeds up
 		self.speedUp = 1.1
 		self.scoreSpeedUp = 5
 
-        # GameSpeedLimit
+		# GameSpeedLimit
 		self.Limit = 0
 		self.globalGameSpeed = 1
 
@@ -41,7 +41,6 @@ class Settings():
 		# Interception settings
 		self.checkBtnPressed = 0
 		self.interception = False
-
 		# New Level Starts at this time
 		self.newStartTime = 0
 
