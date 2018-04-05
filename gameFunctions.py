@@ -351,7 +351,7 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
 		for c in collisions:
 			setting.explosions.add(c.rect.x, c.rect.y)
 			i = random.randrange(100)
-			if i<=20:
+			if i<=15:
 				if i<=5:
 					createItem(setting, screen, c.rect.x, c.rect.y, 1, items)
 				else:
