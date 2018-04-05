@@ -9,6 +9,8 @@ import playMenu as pm  # choosing ship color
 import settingsMenu as sm
 import twoPlayer as tp  # two player mode
 from animations import Explosions
+import sounds
+import random
 from button import Button  # A button class that can be called for every new button
 from gameStats import GameStats  # Game stats that are changed during the duration of the game
 from scoreboard import Scoreboard  # Score board for points, high score, lives, level ect.
@@ -52,6 +54,9 @@ def runGame():
     # Ships for two player
     ship1 = Ship(setting, screen)
     ship2 = Ship(setting, screen)
+
+    #make a group of items to store
+    items = Group()
 
     # make a group of bullets to store
     bullets = Group()
@@ -99,10 +104,11 @@ def runGame():
                 pg.register_quit(runGame())
             if stats.gameActive:
                 gf.updateAliens(setting, stats, sb, screen, ship, aliens, bullets, eBullets)  # Update aliens
-                gf.updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets)  # Update collisions
+                gf.updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items)  # Update collisions
+                gf.updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items)
                 ship.update(bullets, aliens)  # update the ship
                 # Update the screen
-            gf.updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, playBtn, menuBtn, quitBtn, retryBtn, sel)
+            gf.updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, playBtn, menuBtn, quitBtn, retryBtn, sel, items)
         while stats.mainAbout:
             About.checkEvents(setting, screen, stats, sb, playBtn, quitBtn, menuBtn, sel, ship, aliens, bullets,
                               eBullets)
