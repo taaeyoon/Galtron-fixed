@@ -20,6 +20,8 @@ from selector import Selector #Import the main menu selector
 from scoreboard import Scoreboard #Score board for points, high score, lives, level ect.
 from animations import Explosions
 import sounds
+import random
+
 
 
 def runGame():
@@ -97,10 +99,10 @@ def runGame():
 				pg.register_quit(runGame())
 			if stats.gameActive:
 				gf.updateAliens(setting, stats, sb, screen, ship, aliens, bullets, eBullets) #Update aliens
-				gf.updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets) #Update collisions
+				gf.updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items) #Update collisions
 				ship.update(bullets,aliens) #update the ship
 			 #Update the screen
-			gf.updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, playBtn, menuBtn, quitBtn, sel)
+			gf.updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, playBtn, menuBtn, quitBtn, sel, items)
 		while stats.mainAbout:
 			About.checkEvents(setting, screen, stats, sb, playBtn, quitBtn, menuBtn, sel, ship, aliens, bullets, eBullets)
 			About.drawMenu(setting, screen, sb, menuBtn, quitBtn, sel)

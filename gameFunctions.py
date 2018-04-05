@@ -216,18 +216,10 @@ def createAlien(setting, screen, aliens, alienNumber, rowNumber):
 	alien.rect.y = (alien.rect.height + random.randrange(0,setting.screenHeight-alien.rect.height*2))/1.5
 	aliens.add(alien)
 
-"""add item func"""
-def createItem(setting, screen, pos, type):
-	item = Item(setting, screen, pos, type)
+def createItem(setting, screen, posx, posy, type, items):
+	"""add item func"""
+	item = Item(setting, screen, type, posx, posy)
 	screenRect = item.screen.get_rect()
-	alienpos = alien.rect.centerx
-	items.add(item)
-
-
-def createItem(setting, screen, items, alienpos):
-	items = Item(setting, screen)
-	screenRect = item.screen.get_rect()
-	alienpos = alien.rect.centerx
 	items.add(item)
 
 
@@ -301,12 +293,12 @@ def updateAliens(setting, stats, sb, screen, ship, aliens, bullets, eBullets):
 		sb.prepShips()
 
 
-def updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets):
+def updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items):
 	"""update the position of the bullets"""
 	#check if we are colliding
 	bullets.update()
 	eBullets.update()
-	checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets)
+	checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items)
 	checkEBulletShipCol(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
 
 	#if bullet goes off screen delete it
@@ -322,13 +314,19 @@ def updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets):
 		pg.sprite.groupcollide(bullets, eBullets, bullets, eBullets)
 
 
-def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets):
+def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items):
 	"""Detect collisions between alien and bullets"""
 	collisions = pg.sprite.groupcollide(bullets, aliens, True, True)
 	if collisions:
 		sounds.enemy_explosion_sound.play()
 		for c in collisions:
 			setting.explosions.add(c.rect.x, c.rect.y)
+			i = random.randrange(100)
+			if i<=40:
+				if i<=10:
+					createItem(setting, screen, c.rect.x, c.rect.y, 1, items)
+				else:
+					createItem(setting, screen, c.rect.x, c.rect.y, 2, items)
 
 		#Increase the ultimate gauge, upto 100
 		stats.ultimateGauge += setting.ultimateGaugeIncrement
@@ -337,8 +335,8 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
 		for aliens in collisions.values():
 			stats.score += setting.alienPoints * len(aliens)
 		checkHighScore(stats, sb)
+		#alien drop item by random probability
 
-		createItem(setting, screen, item, c.rect.center)
 
 	sb.prepScore()
 	#Check if there are no more aliens
@@ -368,13 +366,16 @@ def checkEBulletShipCol(setting, stats, sb, screen, ship, aliens, bullets, eBull
 			eBullets.empty()
 
 
-def checkItemShipCol(setting, stats, sb, screen, ship, aliens, bullets, items):
+def checkItemShipCol(setting, stats, sb, screen, ship, aliens, item):
 	"""Check for collisions using collision mask between ship and enemy bullets"""
-	for items in items.sprites():
+	for item in items.sprites():
 		if pg.sprite.collide_mask(ship, item):
-			shipHit(setting, stats, sb, screen, ship, aliens, bullets, items)
-			self.shipSpeed *= 1.7
-			items.empty()
+			if item.type == 1:
+				self.shiplimit += 1
+				items.empty()
+			if item.type == 2:
+				self.shipSpeed *= 1.7
+				items.empty()
 
 
 def checkHighScore(stats, sb):
@@ -451,7 +452,7 @@ def drawChargeGauge(setting, screen, ship, sb):
 	pg.draw.rect(screen, (255, 255, 255), (x, y, 100, 10), 0)
 	pg.draw.rect(screen, color, (x, y, ship.chargeGauge, 10), 0)
 
-def updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, playBtn, menuBtn, quitBtn, sel):
+def updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, playBtn, menuBtn, quitBtn, sel, items):
 	"""Update images on the screen and flip to the new screen"""
 	#Redraw the screen during each pass through the loop
 	#Fill the screen with background color
@@ -478,7 +479,8 @@ def updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, pl
 
 	ship.blitme()
 	aliens.draw(screen)
-
+	for i in items:
+		i.drawitem()
 	#Update Ultimate Gauge
 	updateUltimateGauge(setting, screen, stats, sb)
 

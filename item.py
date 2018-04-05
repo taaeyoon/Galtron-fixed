@@ -4,20 +4,16 @@ from pygame.sprite import *
 
 class Item(Sprite):
 	"""A class to manage speed item droped from the alien"""
-
-	def __init__(self, setting, screen, pos, type):
-
+	def __init__(self, setting, screen, type, posx, posy):
 		"""Create a item object at the aliens current position"""
 		super(Item, self).__init__()
 		self.screen = screen
 
-		t = randint(1,100)
-		if(1<=t<=33):
+		if(type==1):
 			self.image = pg.image.load('gfx/item_heal.png')
-			self.type = heal
-		else:
+		if(type==2):
 			self.image = pg.image.load('gfx/item_speed.png')
-			self.type = speed
+		self.type = type
 
 		self.rect = self.image.get_rect()
 
@@ -26,8 +22,8 @@ class Item(Sprite):
 
 		#Create a items rect at (0,0)+-5
 		##self.rect = pg.Rect(0, 0, setting.bulletWidth, setting.bulletHeight)
-		self.rect.centerx = randint(alien.rect.centerx-5,alien.rect.centerx+5)
-		self.rect.bottom = alien.rect.bottom
+		self.rect.x = posx
+		self.rect.y = posy
 
 		#store the item position as a decimal value
 		self.y = float(self.rect.y)
