@@ -114,3 +114,12 @@ class Settings():
                 self.fleetDir *= 1.3
                 self.alienPoints *= 1.3
                 self.Limit += 1
+
+	def shipspeedup(self):
+		starttime = pg.time.get_ticks()
+		self.shipSpeed *= 2.0
+		# while True:
+		# 	endtime = pg.time.get_ticks()
+		# 	if endtime - starttime > 10000:
+		# 		self.shipSpeed /= 2.0
+		# 		break

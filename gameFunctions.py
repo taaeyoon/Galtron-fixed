@@ -314,6 +314,31 @@ def updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets, i
 		pg.sprite.groupcollide(bullets, eBullets, bullets, eBullets)
 
 
+def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items):
+	"""update the position of the bullets"""
+	#check if we are colliding
+	items.update()
+	#checkItemShipCol(setting, stats, sb, screen, ship, aliens, items)
+	#if bullet goes off screen delete it
+	for item in items.copy():
+		screenRect = screen.get_rect()
+		if item.rect.top >= screenRect.bottom:
+			items.remove(item)
+	for item in items.copy():
+		if item.rect.bottom <= 0:
+			items.remove(item)
+	for item in items.copy():
+		if item.rect.centerx -30 < ship.rect.x < item.rect.x +30 and item.rect.centery -20 < ship.rect.centery < item.rect.centery +20:
+			#print("MEET!")
+			if item.type == 1:
+				stats.shipsLeft += 1
+				#print("meet 1")
+			if item.type == 2:
+				setting.shipspeedup()
+				#print("meet 2")
+			items.empty()
+
+
 def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets, items):
 	"""Detect collisions between alien and bullets"""
 	collisions = pg.sprite.groupcollide(bullets, aliens, True, True)
@@ -322,8 +347,8 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
 		for c in collisions:
 			setting.explosions.add(c.rect.x, c.rect.y)
 			i = random.randrange(100)
-			if i<=40:
-				if i<=10:
+			if i<=20:
+				if i<=5:
 					createItem(setting, screen, c.rect.x, c.rect.y, 1, items)
 				else:
 					createItem(setting, screen, c.rect.x, c.rect.y, 2, items)
@@ -366,16 +391,18 @@ def checkEBulletShipCol(setting, stats, sb, screen, ship, aliens, bullets, eBull
 			eBullets.empty()
 
 
-def checkItemShipCol(setting, stats, sb, screen, ship, aliens, item):
-	"""Check for collisions using collision mask between ship and enemy bullets"""
-	for item in items.sprites():
-		if pg.sprite.collide_mask(ship, item):
-			if item.type == 1:
-				self.shiplimit += 1
-				items.empty()
-			if item.type == 2:
-				self.shipSpeed *= 1.7
-				items.empty()
+# def checkItemShipCol(setting, stats, sb, screen, ship, aliens, items):
+# 	"""Check for collisions using collision mask between ship and enemy bullets"""
+# 	for item in items.sprites():
+# 		if pg.sprite.collide_mask(ship, item):
+# 			print("MEET!")
+# 			if item.type == 1:
+# 				self.shiplimit += 1
+# 				print("meet 1")
+# 			if item.type == 2:
+# 				self.shipSpeed *= 1.7
+# 				print("meet 2")
+# 			items.empty()
 
 
 def checkHighScore(stats, sb):
@@ -480,6 +507,7 @@ def updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, pl
 	ship.blitme()
 	aliens.draw(screen)
 	for i in items:
+		i.update()
 		i.drawitem()
 	#Update Ultimate Gauge
 	updateUltimateGauge(setting, screen, stats, sb)

@@ -34,7 +34,7 @@ class Item(Sprite):
 	def update(self):
 		"""Move the item -y up the screen"""
 		#update the decimal position of the item
-		self.y += self.bulletSpeed
+		self.y += self.itemSpeed
 		#Update the rect position
 		self.rect.y = self.y
 
