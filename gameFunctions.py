@@ -276,12 +276,20 @@ def updateAliens(setting, stats, sb, screen, ship, aliens, bullets, eBullets):
     checkFleetEdges(setting, aliens)
     checkFleetBottom(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
     aliens.update(setting, screen, ship, aliens, eBullets)
+<<<<<<< HEAD
 
     # look for alien-ship collision
     if pg.sprite.spritecollideany(ship, aliens) and pg.time.get_ticks() - setting.newStartTime >= 1500:
         # 74
         shipHit(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
 
+=======
+
+    # look for alien-ship collision
+    if pg.sprite.spritecollideany(ship, aliens) and pg.time.get_ticks() - setting.newStartTime >= 1500:
+        # 74
+        shipHit(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
+>>>>>>> eef423f539fc92b8ddfe038f2df5debf2f28cb1b
 
 
 def updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets):
@@ -498,4 +506,8 @@ def updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, pl
     setting.explosions.draw(screen)
     # Make the most recently drawn screen visable.
     pg.display.update()
+<<<<<<< HEAD
     clock.tick(FPS)
+=======
+    clock.tick(FPS)
+>>>>>>> eef423f539fc92b8ddfe038f2df5debf2f28cb1b

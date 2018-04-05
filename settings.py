@@ -1,30 +1,31 @@
 import pygame as pg
 import utilityFunctions
 
+
 getReversedRGB = utilityFunctions.getReversedRGB
 
 class Settings():
-	"""A class to store all settings for game"""
+    """A class to store all settings for game"""
 
-	def __init__(self):
-		"""Initialize the class"""
-		self.windowCaption = 'Galtron'
-		self.screenWidth = 550
-		self.screenHeight = 650
-		self.bgColor = (20, 20, 20)
-		self.image = pg.image.load("gfx/background.bmp")
-		self.image = pg.transform.scale(self.image, (self.screenWidth, self.screenHeight))
-		self.bg = self.image
-		# Ultimate settings
-		self.ultimateGaugeIncrement = 3
+    def __init__(self):
+        """Initialize the class"""
+        self.windowCaption = 'Galtron'
+        self.screenWidth = 550
+        self.screenHeight = 650
+        self.bgColor = (20, 20, 20)
+        self.image = pg.image.load("gfx/background.bmp")
+        self.image = pg.transform.scale(self.image, (self.screenWidth, self.screenHeight))
+        self.bg = self.image
+        # Ultimate settings
+        self.ultimateGaugeIncrement = 3
 
-		# Ships speed
-		self.shipLimit = 5
+        # Ships speed
+        self.shipLimit = 5
 
         # Bullet settings
-		self.bulletWidth = 3
-		self.bulletHeight = 15
-		self.bulletColor = (60, 60, 60)
+        self.bulletWidth = 3
+        self.bulletHeight = 15
+        self.bulletColor = (60, 60, 60)
 
         # Alien settings
 
