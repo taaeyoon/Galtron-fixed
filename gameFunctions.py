@@ -320,18 +320,22 @@ def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ite
 	items.update()
 	#checkItemShipCol(setting, stats, sb, screen, ship, aliens, items)
 	#if bullet goes off screen delete it
-	for item in items.copy():
+	#for item in items.copy():
+	for item in items.sprites():
 		screenRect = screen.get_rect()
 		if item.rect.top >= screenRect.bottom:
 			items.remove(item)
-	for item in items.copy():
+	#for item in items.copy():
+	for item in items.sprites():
 		if item.rect.bottom <= 0:
 			items.remove(item)
-	for item in items.copy():
+	#for item in items.copy():
+	for item in items.sprites():
 		if item.rect.centerx -30 < ship.rect.x < item.rect.x +30 and item.rect.centery -20 < ship.rect.centery < item.rect.centery +20:
 			#print("MEET!")
 			if item.type == 1:
 				stats.shipsLeft += 1
+				sb.prepShips()
 				#print("meet 1")
 			if item.type == 2:
 				setting.shipspeedup()
