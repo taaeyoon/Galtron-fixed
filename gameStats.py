@@ -30,7 +30,7 @@ class GameStats():
         self.counter = 3
         self.ultimateGauge = 0
         self.ultimatePattern = 1
-        
+
         self.tempScore = self.loadHighScore()
         if self.highScore >= self.tempScore:
             self.saveHighScore()
