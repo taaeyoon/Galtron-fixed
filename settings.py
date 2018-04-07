@@ -1,8 +1,9 @@
 import pygame as pg
+
 import utilityFunctions
 
+getInvertedRGB = utilityFunctions.getInvertedRGB
 
-getReversedRGB = utilityFunctions.getReversedRGB
 
 class Settings():
     """A class to store all settings for game"""
@@ -16,6 +17,9 @@ class Settings():
         self.image = pg.image.load("gfx/background.bmp")
         self.image = pg.transform.scale(self.image, (self.screenWidth, self.screenHeight))
         self.bg = self.image
+        self.gameOverImage = pg.image.load("gfx/gameover.png")
+        self.gameOverImage = pg.transform.scale(self.gameOverImage,
+                                                (self.screenWidth - 40, self.gameOverImage.get_height()))
         # Ultimate settings
         self.ultimateGaugeIncrement = 3
 
@@ -44,13 +48,12 @@ class Settings():
         # New Level Starts at this time
         self.newStartTime = 0
 
-    def reverseCol(self):
-        self.bgColor = getReversedRGB(self.bgColor)
-        self.bulletColor = getReversedRGB(self.bulletColor)
+    def invertColor(self):
+        self.bgColor = getInvertedRGB(self.bgColor)
+        self.bulletColor = getInvertedRGB(self.bulletColor)
 
 
     def bgimg(self, number):
-        number = number % 3
         if number == 0:
             self.image = pg.image.load("gfx/background2.png")
         elif number == 1:
@@ -76,7 +79,11 @@ class Settings():
             self.alienSpeed *= self.speedUp
             self.fleetDropSpeed *= self.speedUp
 
-        self.alienPoints = int(self.alienPoints + self.scoreSpeedUp)
+            # self.alienPoints = int(self.alienPoints * self.scoreSpeedUp)
+            # self.alienPoints = int(self.alienPoints + self.scoreSpeedUp)
+
+    def setIncreaseScoreSpeed(self, level):
+        self.alienPoints = int(self.alienPoints + ((level - 1) * 10))
 
     def halfspeed(self):
         if self.Limit >= -1 and self.shipSpeed > 0 and self.bulletSpeed > 0 and self.alienSpeed > 0 and self.fleetDropSpeed > 0:
