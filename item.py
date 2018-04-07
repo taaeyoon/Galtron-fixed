@@ -28,7 +28,7 @@ class Item(Sprite):
         #store the item position as a decimal value
         self.y = float(self.rect.y)
 
-        self.itemSpeed = setting.d * 0.3
+        self.itemSpeed = setting.bulletspeed * 0.3
 
 
     def update(self):
