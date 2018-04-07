@@ -1,5 +1,6 @@
 import random
-import sys, time
+import sys
+import time
 import pygame as pg
 import sounds
 from time import sleep
