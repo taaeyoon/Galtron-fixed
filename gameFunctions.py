@@ -444,7 +444,7 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
                 setting.explosions.add(alien.rect.x, alien.rect.y)
                 sounds.enemy_explosion_sound.play()
                 #if an enemy dies, it falls down an item randomly.
-                #use cummulative probability
+                #use cumulative probability
                 i = random.randrange(100)
                 if i<=setting.probabilityHeal:
                     createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 1, items)
