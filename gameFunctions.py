@@ -99,7 +99,7 @@ def checkKeydownEvents(event, setting, screen, stats, sb, ship, aliens, bullets,
         if not stats.paused:
             if ship.checkReadyToShoot() and (len(bullets) < 10):
                 sounds.attack.play()
-                newBullet = Bullet(setting, screen, ship, ship.trajectory)
+                newBullet = Bullet(setting, screen, ship, ship.trajectory, ship.damage)
                 bullets.add(newBullet)
                 ship.setNextShootTime()
             ship.chargeGaugeStartTime = pg.time.get_ticks()
@@ -107,7 +107,7 @@ def checkKeydownEvents(event, setting, screen, stats, sb, ship, aliens, bullets,
 
     elif event.key == pg.K_x or event.key == 167:
         # Ultimate key
-        useUltimate(setting, screen, stats, bullets, stats.ultimatePattern)
+        useUltimate(setting, screen, stats, bullets, stats.ultimatePattern, ship)
         # Check for pause key
     elif event.key == pg.K_p or event.key == 181:
         sounds.paused.play()
@@ -150,12 +150,13 @@ def checkKeyupEvents(event, setting, screen, stats, ship, bullets, charged_bulle
         if not stats.paused:
             if (ship.chargeGauge == 100):
                 sounds.charge_shot.play()
-                newBullet = Bullet(setting, screen, ship, ship.trajectory, 3, 5)
-                charged_bullets.add(newBullet)
+                newBullet = Bullet(setting, screen, ship, ship.trajectory, 3, ship.damage * 5)
+                bullets.add(newBullet)
+                #charged_bullets.add(newBullet)
                 ship.chargeGauge = 0
             elif (50 <= ship.chargeGauge):
                 sounds.charge_shot.play()
-                newBullet = Bullet(setting, screen, ship, ship.trajectory, 2, 3)
+                newBullet = Bullet(setting, screen, ship, ship.trajectory, 2, ship.damage * 3)
                 charged_bullets.add(newBullet)
         ship.shoot = False
 
@@ -393,7 +394,22 @@ def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ite
                     stats.shipsLeft += 1
                 else:
                     stats.score += setting.alienPoints * 3
+            if item.type == 2:
+                setting.newItemSlowTime = pg.time.get_ticks()                
+                setting.alienSpeed *= 0.5
+                setting.alienbulletSpeed *= 0.5
+                setting.fleetDropSpeed *= 0.5
+                
             items.remove(item)
+
+def updateSlowtime(setting):
+    if setting.newItemSlowTime !=0:
+        if pg.time.get_ticks() - setting.newItemSlowTime > setting.slowTime:
+            setting.alienSpeed *= 2
+            setting.alienbulletSpeed *= 2
+            setting.fleetDropSpeed *= 2
+            setting.newItemSlowTime = 0
+    
 
 
 def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets, charged_bullets, items):
@@ -420,6 +436,8 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
                 i = random.randrange(100)
                 if i<=setting.probabilityHeal:
                     createItem(setting, screen, alien.rect.x, alien.rect.y, 1, items)
+                if i>10 and i<=setting.probabilityTime:  # didn't make situation that 2 items drop together
+                    createItem(setting, screen, alien.rect.x, alien.rect.y, 2, items)
                 aliens.remove(alien)
 
         # Increase the ultimate gauge, upto 100
@@ -490,18 +508,18 @@ def updateUltimateGauge(setting, screen, stats, sb):
         pg.draw.rect(screen, (0, 255, 255), (x, y, gauge, 12), 0)
 
 
-def UltimateDiamondShape(setting, screen, stats, sbullets):
+def UltimateDiamondShape(setting, screen, stats, sbullets, damage):
     xpos = 10
     yCenter = setting.screenHeight + (setting.screenWidth / 50) * 20
     yGap = 0
     # Make a diamond pattern
     while xpos <= setting.screenWidth:
         if yGap == 0:
-            sBullet = SpecialBullet(setting, screen, (xpos, yCenter))
+            sBullet = SpecialBullet(setting, screen, (xpos, yCenter), damage)
             sbullets.add(sBullet)
         else:
-            upBullet = SpecialBullet(setting, screen, (xpos, yCenter + yGap))
-            downBullet = SpecialBullet(setting, screen, (xpos, yCenter - yGap))
+            upBullet = SpecialBullet(setting, screen, (xpos, yCenter + yGap), damage)
+            downBullet = SpecialBullet(setting, screen, (xpos, yCenter - yGap), damage)
             sbullets.add(upBullet)
             sbullets.add(downBullet)
         if xpos <= setting.screenWidth / 2:
@@ -511,12 +529,12 @@ def UltimateDiamondShape(setting, screen, stats, sbullets):
         xpos += setting.screenWidth / 30
 
 
-def useUltimate(setting, screen, stats, sbullets, pattern):
+def useUltimate(setting, screen, stats, sbullets, pattern, ship):
     if stats.ultimateGauge != 100:
         return
     if pattern == 1:
         sounds.ult_attack.play()
-        UltimateDiamondShape(setting, screen, stats, sbullets)
+        UltimateDiamondShape(setting, screen, stats, sbullets, ship.damage)
     # elif pattern == 2:
     #		make other pattern
     stats.ultimateGauge = 0
@@ -595,6 +613,9 @@ def updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ch
         i.drawitem()
     #Shield if ship is invincibile
     updateInvincibility(setting, screen, ship)
+
+    # Update Item_time
+    updateSlowtime(setting)
 
     # Update Ultimate Gauge
     updateUltimateGauge(setting, screen, stats, sb)
