@@ -212,7 +212,7 @@ def createAlien(setting, stats, screen, aliens, alienNumber, rowNumber):
     if setting.gameLevel == "normal":
         alien = Alien(setting, screen, 1 + stats.level // 4)
     else:
-        alien = Alien(setting, screen, 1 + stats.level // 2)        
+        alien = Alien(setting, screen, 1 + stats.level // 2)
     alienWidth = alien.rect.width
     screenRect = alien.screen.get_rect()
     alien.x = alienWidth + 2 * alienWidth * alienNumber
@@ -257,13 +257,13 @@ def createFleet(setting, stats, screen, ship, aliens):
 
 def createFleetBoss(setting, stats, screen, ship, aliens):
     """Create a fleet of aliens"""
-    alien = Alien(setting, screen, stats.level*3)
+    alien = Alien(setting, screen, stats.level*20)
     numberAliensX = 1
     numberRows = 1
 
     # create the first row of aliens
     createBoss(setting, stats, screen, aliens, numberAliensX, numberRows)
-            
+
 def checkFleetEdges(setting, aliens):
     """Respond if any aliens have reached an edge"""
     for alien in aliens.sprites():
@@ -276,17 +276,26 @@ def checkFleetBottom(setting, stats, sb, screen, ship, aliens, bullets, eBullets
     """Respond if any aliens have reached an bottom of screen"""
     for alien in aliens.sprites():
         if alien.checkBottom():
-            shipHit(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
+            if alien.isboss == False:
+                shipHit(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
+            else:
+                alien.rect.y -= 20
 
 
 def changeFleetDir(setting, aliens):
     """Change the direction of aliens"""
     for alien in aliens.sprites():
         ##############
-        if setting.gameLevel == 'normal':
-            alien.rect.y += setting.fleetDropSpeed
-        elif setting.gameLevel == 'hard':
-            alien.rect.y += (setting.fleetDropSpeed + 3)
+        if alien.isboss == False:
+            if setting.gameLevel == 'normal':
+                alien.rect.y += setting.fleetDropSpeed
+            elif setting.gameLevel == 'hard':
+                alien.rect.y += (setting.fleetDropSpeed + 3)
+        else:
+            if alien.rect.y < int(setting.screenHeight * 0.8):
+                alien.rect.y += 50
+            else:
+                alien.rect.y -= 50
     setting.fleetDir *= -1
 
 
@@ -337,7 +346,9 @@ def updateBullets(setting, screen, stats, sb, ship, aliens, bullets, eBullets, c
     #check if we are colliding
     bullets.update()
     for eBullet in eBullets:
-        eBullet.update()
+        for alien in aliens:
+            eBullet.update(alien)
+            break
     charged_bullets.update()
     checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets, charged_bullets, items)
     checkEBulletShipCol(setting, stats, sb, screen, ship, aliens, bullets, eBullets)
