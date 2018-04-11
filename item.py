@@ -11,9 +11,11 @@ class Item(Sprite):
 
         #add item types if you want
         if(type==1):
-            self.image = pg.image.load('gfx/item_heal.png')
+            self.image = pg.image.load('gfx/item_heal2.png')
         if(type==2):
-            self.image = pg.image.load('gfx/item_speed.png')            
+            self.image = pg.image.load('gfx/item_time.png')
+        if(type==3):
+            self.image = pg.image.load('gfx/item_speed.png')
 
         self.type = type
 
