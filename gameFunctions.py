@@ -388,7 +388,7 @@ def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ite
         if item.rect.bottom <= 0:
             items.remove(item)
     for item in items.sprites():
-        if item.rect.centerx -30 < ship.rect.x < item.rect.x +30 and item.rect.centery -30 < ship.rect.centery < item.rect.centery +30:
+        if item.rect.centerx -35 < ship.rect.x < item.rect.x +35 and item.rect.centery -35 < ship.rect.centery < item.rect.centery +35:
             if item.type == 1:
                 if stats.shipsLeft < setting.shipLimit:
                     stats.shipsLeft += 1
@@ -401,7 +401,7 @@ def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ite
                 setting.fleetDropSpeed *= 0.5
             if item.type == 3:
                 setting.newItemSpeedTime = pg.time.get_ticks()
-                setting.sheepSpeed *= 2
+                setting.shipSpeed *= 2
 
             items.remove(item)
 
@@ -416,7 +416,9 @@ def updateSlowtime(setting):
 def updateSpeedtime(setting):
     if setting.newItemSpeedTime !=0:
         if pg.time.get_ticks() - setting.newItemSpeedTime > setting.speedTime:
-            setting.sheepSpeed *= 0.5
+            setting.shipSpeed *= 0.5
+            setting.newItemSpeedTime = 0
+
 
 
 def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets, charged_bullets, items):
@@ -628,6 +630,7 @@ def updateScreen(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ch
 
     # Update Item_time
     updateSlowtime(setting)
+    updateSpeedtime(setting)
 
     # Update Ultimate Gauge
     updateUltimateGauge(setting, screen, stats, sb)
