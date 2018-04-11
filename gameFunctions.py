@@ -219,6 +219,8 @@ def createAlien(setting, stats, screen, aliens, alienNumber, rowNumber):
     """ random position of enemy will be created in game window"""
     alien.rect.x = random.randrange(0, setting.screenWidth - alien.x / 2)
     alien.rect.y = (alien.rect.height + random.randrange(0, setting.screenHeight - alien.rect.height * 2)) / 1.5
+    if(stats.level % 5 == 0):
+        alien.hitPoint += stats.level / 5
     aliens.add(alien)
 
 def createBoss(setting, stats, screen, aliens, alienNumber, rowNumber):
