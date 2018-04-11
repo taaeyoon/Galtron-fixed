@@ -390,6 +390,8 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
 
         for alien in collisions :
             #charged_bullet bgManager
+            if alien.animationState == 0 :
+                alien.animationState = 1
             for charged_bullet in charged_bullets:
                 alien.hitPoint -= charged_bullet.damage
             for bullet in collisions[alien] :
