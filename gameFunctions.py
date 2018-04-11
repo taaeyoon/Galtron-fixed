@@ -237,13 +237,13 @@ def createBoss(setting, stats, screen, aliens, alienNumber, rowNumber):
     aliens.add(alien)
     boss = alien
 
-def createItem(setting, screen, posx, posy, type, items):
+def createItem(setting, screen, stats, posx, posy, type, items):
     """add item func"""
     # item number is 1 per type
     for itype in items:
         if itype.type == type:
             return
-    item = Item(setting, screen, type, posx, posy)
+    item = Item(setting, screen, stats, type, posx, posy)
     screenRect = item.screen.get_rect()
     items.add(item)
 
@@ -394,12 +394,13 @@ def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ite
                     stats.shipsLeft += 1
                 else:
                     stats.score += setting.alienPoints * 3
-            if item.type == 2:
+            elif item.type == 2:
                 setting.newItemSlowTime = pg.time.get_ticks()                
                 setting.alienSpeed *= 0.5
                 setting.alienbulletSpeed *= 0.5
                 setting.fleetDropSpeed *= 0.5
-                
+            elif item.type == 3:
+                setting.newStartTime = pg.time.get_ticks()
             items.remove(item)
 
 def updateSlowtime(setting):
@@ -410,6 +411,7 @@ def updateSlowtime(setting):
             setting.fleetDropSpeed *= 2
             setting.newItemSlowTime = 0
     
+
 
 
 def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBullets, charged_bullets, items):
@@ -435,9 +437,11 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
                 #if an enemy dies, it falls down an item randomly.
                 i = random.randrange(100)
                 if i<=setting.probabilityHeal:
-                    createItem(setting, screen, alien.rect.x, alien.rect.y, 1, items)
-                if i>10 and i<=setting.probabilityTime:  # didn't make situation that 2 items drop together
-                    createItem(setting, screen, alien.rect.x, alien.rect.y, 2, items)
+                    createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 1, items)
+                elif i<=setting.probabilityTime:  # There is no situation that 2 items drop together
+                    createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 2, items)
+                elif i<=setting.probabilityShield:
+                    createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 3, items)
                 aliens.remove(alien)
 
         # Increase the ultimate gauge, upto 100
