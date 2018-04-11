@@ -237,13 +237,13 @@ def createBoss(setting, stats, screen, aliens, alienNumber, rowNumber):
     aliens.add(alien)
     boss = alien
 
-def createItem(setting, screen, posx, posy, type, items):
+def createItem(setting, screen, stats, posx, posy, type, items):
     """add item func"""
     # item number is 1 per type
     for itype in items:
         if itype.type == type:
             return
-    item = Item(setting, screen, type, posx, posy)
+    item = Item(setting, screen, stats, type, posx, posy)
     screenRect = item.screen.get_rect()
     items.add(item)
 
@@ -394,15 +394,16 @@ def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ite
                     stats.shipsLeft += 1
                 else:
                     stats.score += setting.alienPoints * 3
-            if item.type == 2:
+            elif item.type == 2:
                 setting.newItemSlowTime = pg.time.get_ticks()
                 setting.alienSpeed *= 0.5
                 setting.alienbulletSpeed *= 0.5
                 setting.fleetDropSpeed *= 0.5
-            if item.type == 3:
+            elif item.type == 3:
+                setting.newStartTime = pg.time.get_ticks()
+            elif item.type == 4:
                 setting.newItemSpeedTime = pg.time.get_ticks()
                 setting.shipSpeed *= 2
-
             items.remove(item)
 
 def updateSlowtime(setting):
@@ -418,6 +419,7 @@ def updateSpeedtime(setting):
         if pg.time.get_ticks() - setting.newItemSpeedTime > setting.speedTime:
             setting.shipSpeed *= 0.5
             setting.newItemSpeedTime = 0
+
 
 
 
@@ -445,11 +447,14 @@ def checkBulletAlienCol(setting, screen, stats, sb, ship, aliens, bullets, eBull
                 #use cummulative probability
                 i = random.randrange(100)
                 if i<=setting.probabilityHeal:
-                    createItem(setting, screen, alien.rect.x, alien.rect.y, 1, items)
+                    createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 1, items)
                 if setting.probabilityHeal<i<=setting.probabilityHeal+setting.probabilityTime:
-                    createItem(setting, screen, alien.rect.x, alien.rect.y, 2, items)
-                if setting.probabilityHeal+setting.probabilityTime<i<=setting.probabilityHeal+setting.probabilityTime+setting.probabilitySpeed:
-                    createItem(setting, screen, alien.rect.x, alien.rect.y, 3, items)
+                    createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 2, items)
+                if setting.probabilityHeal+setting.probabilityTime<i<=setting.probabilityHeal+setting.probabilityTime+setting.probabilityShield:
+                    createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 3, items)
+                if setting.probabilityHeal+setting.probabilityTime+setting.probabilityShield<i<=setting.probabilityHeal+setting.probabilityTime+setting.probabilityShield+setting.probabilitySpeed:
+                    createItem(setting, screen, stats, alien.rect.x, alien.rect.y, 4, items)
+
                 aliens.remove(alien)
 
         # Increase the ultimate gauge, upto 100
