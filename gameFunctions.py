@@ -416,7 +416,7 @@ def updateItems(setting, screen, stats, sb, ship, aliens, bullets, eBullets, ite
                     setting.alienSpeed *= 0.5
                     setting.alienbulletSpeed *= 0.5
                     setting.fleetDropSpeed *= 0.5
-                    sounds.slowdown.play()
+                    sounds.slowdown_sound.play()
             elif item.type == 3:
                 setting.newStartTime = pg.time.get_ticks()
                 sounds.shield_sound.play()
