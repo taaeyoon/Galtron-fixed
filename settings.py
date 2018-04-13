@@ -40,7 +40,6 @@ class Settings():
 
         # Game Speed
         self.gameSpeed = 'middle'
-        print(self.gameSpeed)
         self.initDynamicSettings()
         # Interception settings
         self.checkBtnPressed = 0
