@@ -6,49 +6,6 @@ getInvertedRGB = utilityFunctions.getInvertedRGB
 
 
 class Settings():
-<<<<<<< HEAD
-	"""A class to store all settings for game"""
-	def __init__(self):
-		"""Initialize the class"""
-		self.windowCaption = 'Galtron'
-		self.screenWidth = 550
-		self.screenHeight = 650
-		self.bgColor = (20, 20, 20)
-		self.bg = pg.image.load("gfx/background.bmp")
-
-		#Ships speed
-		self.shipLimit = 3
-
-		#Bullet settings
-		self.bulletWidth = 3
-		self.bulletHeight = 15
-		self.bulletColor = (60, 60, 60)
-
-		#Alien settings
-
-		#How quickly the game speeds up
-		self.speedUp = 1.1
-		self.scoreSpeedUp = 1.5
-
-		self.initDynamicSettings()
-
-	def initDynamicSettings(self):
-		self.shipSpeed = 1.5
-		self.bulletSpeed = 3
-		self.alienSpeed = 1
-		self.fleetDropSpeed = 5
-		self.fleetDir = 1
-		self.alienPoints = 50
-
-	def increaseSpeed(self):
-		"""Increase the speed settings"""
-		#self.shipSpeed *= self.speedUp
-		#self.bulletSpeed *= self.speedUp
-		if self.alienSpeed <= 1.5:
-			self.alienSpeed *= self.speedUp
-			self.fleetDropSpeed *= self.speedUp
-		self.alienPoints = int(self.alienPoints * self.scoreSpeedUp)
-=======
 
     """A class to store all settings for game"""
 
@@ -81,6 +38,8 @@ class Settings():
         self.Limit = 0
         self.globalGameSpeed = 1
 
+        # Game Speed
+        self.gameSpeed = 'middle'
         self.initDynamicSettings()
         # Interception settings
         self.checkBtnPressed = 0
@@ -89,9 +48,11 @@ class Settings():
         self.newStartTime = 0
         # The start time for item_time
         self.newItemSlowTime = 0
+        self.newItemSpeedTime = 0
 
         # Game Level
         self.gameLevel = 'normal'
+
 
         # Alien shoot speed
         self.shootTimer = 50
@@ -100,27 +61,36 @@ class Settings():
         self.probabilityHeal = 10
         self.probabilityTime = 20
         self.probabilityShield = 25
+        self.probabilitySpeed = 20
 
         #invincibile time
         self.invincibileTime = 2000
 
         #item_time Slow time
         self.slowTime = 3000
+        self.speedTime = 7000
 
-        
+
     def invertColor(self):
         self.bgColor = getInvertedRGB(self.bgColor)
         self.bulletColor = getInvertedRGB(self.bulletColor)
 
+    def speedVariable(self):
+        if self.gameSpeed == 'fast':
+            return 2
+        elif self.gameSpeed == 'middle':
+            return 1
+        elif self.gameSpeed == 'slow':
+            return 0.5
 
     def initDynamicSettings(self):
-        self.shipSpeed = 2.5
-        self.bulletSpeed = 4
-        self.alienSpeed = 1
-        self.alienbulletSpeed = 4
-        self.fleetDropSpeed = 5
-        self.fleetDir = 1
-        self.alienPoints = 10
+        self.shipSpeed = 2.5 * self.speedVariable()
+        self.bulletSpeed = 4* self.speedVariable()
+        self.alienSpeed = 1* self.speedVariable()
+        self.alienbulletSpeed = 4* self.speedVariable()
+        self.fleetDropSpeed = 5* self.speedVariable()
+        self.fleetDir = 1* self.speedVariable()
+        self.alienPoints = 10* self.speedVariable()
 
     def increaseSpeed(self):
         """Increase the speed settings"""
@@ -158,4 +128,3 @@ class Settings():
         self.alienPoints *= 1.3
         self.globalGameSpeed *= 1.3
         self.Limit += 1
->>>>>>> 8c6365243f9a4907d065f30047ca3821e94e59fe

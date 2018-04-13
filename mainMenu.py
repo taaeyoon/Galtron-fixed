@@ -52,16 +52,9 @@ def checkEvents(setting, screen, stats, sb, bMenu, ship, aliens, bullets, eBulle
                     buttonAction(stats, mouseBtnName)
 
 
-<<<<<<< HEAD
-def prepTitle(setting, screen):
-	#Font settings for scoring information
-	global image, rect
-	image = pg.image.load('gfx/title(2).png')
-	rect = image.get_rect()
-=======
 def buttonAction(stats, selectedName):
     if selectedName == 'play':
-        # stats.setGameLoop('playMenu')
+        stats.setGameLoop('playMenu')
         stats.setGameLoop('levelMenu')
     elif selectedName == 'twoPlay':
         stats.setGameLoop('twoPlayer')
@@ -72,7 +65,6 @@ def buttonAction(stats, selectedName):
     elif selectedName == 'quit':
         pg.time.delay(300)
         sys.exit()
->>>>>>> 8c6365243f9a4907d065f30047ca3821e94e59fe
 
 
 def drawMenu(setting, screen, sb, bMenu, bgImage, bgImageRect):

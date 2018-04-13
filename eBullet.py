@@ -1,19 +1,6 @@
 import pygame as pg
 from pygame.sprite import *
 
-<<<<<<< HEAD
-class EBullet(Sprite):
-	"""A class to manage bullets fired from the alien"""
-	def __init__(self, setting, screen, alien):
-		"""Create a bullet object at the ships current position"""
-		super(EBullet, self).__init__()
-		self.screen = screen
-
-		#load the bullet image and set its rect attribute
-		self.image = pg.image.load('gfx/ebullet_colorchange.bmp')
-		self.rect = self.image.get_rect()
-=======
->>>>>>> 8c6365243f9a4907d065f30047ca3821e94e59fe
 
 class EBullet(Sprite):
     """A class to manage bullets fired from the alien"""
@@ -89,13 +76,6 @@ class EBullet(Sprite):
         self.rect.y = self.y
         self.rect.x = self.x
 
-<<<<<<< HEAD
-	def drawBullet(self):
-		"""Draw the bullet to the screen"""
-		#pg.draw.rect(self.screen, self.color, self.rect)
-		self.screen.blit(self.image, self.rect)
-=======
     def drawBullet(self):
         # pg.draw.rect(self.screen, self.color, self.rect)
         self.screen.blit(self.image, self.rect)
->>>>>>> 8c6365243f9a4907d065f30047ca3821e94e59fe

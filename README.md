@@ -5,11 +5,6 @@
 | Participant   | Role       | ETC |
 |---------------|------------|-----|
 | Jeongkyu Shin | Instructor |     |
-<<<<<<< HEAD
-| Jaewoo Yang   | Student    |     |
-| JK            | Student    |     |
-| Moon Ki Hun   | Student    |     |
-=======
 | Lee jaehee    | student    |     |
 | Minseok  Kang | Student    |     |
 | Jaehun Kim.   | student    |     |
@@ -72,7 +67,6 @@
 | Keunmo Koo.   | Genius     |     |
 
 
->>>>>>> 8c6365243f9a4907d065f30047ca3821e94e59fe
 
 # Galtron
 A simple 2D shooter made with pygame, written in python...

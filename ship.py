@@ -48,17 +48,10 @@ class Ship(Sprite):
         self.rect.centery = self.screenRect.centery + self.screenRect.bottom / 2 - self.rect.height
         self.rect.bottom = self.screenRect.bottom - 10
 
-<<<<<<< HEAD
-		#Load the ship image and its rect.
-		self.image = pg.image.load('gfx/player1.bmp')
-		self.rect = self.image.get_rect()
-		self.screenRect = screen.get_rect()
-=======
         self.center = float(self.rect.centerx)
         self.right = self.screenRect.right
         self.left = self.screenRect.left
         self.centery = float(self.rect.centery)
->>>>>>> 8c6365243f9a4907d065f30047ca3821e94e59fe
 
         # Movement flag
         self.movingRight = False
@@ -145,13 +138,7 @@ class Ship(Sprite):
         """Draw the ship at its current location."""
         self.screen.blit(self.image, self.rect)
 
-<<<<<<< HEAD
-	def centerShip(self):
-		"""Centers the ship"""
-		self.center = self.screenRect.centerx
-=======
     def centerShip(self):
         """Centers the ship"""
         self.center = self.screenRect.centerx
         self.centery = self.screenRect.centery + self.screenRect.bottom / 2 - self.rect.height
->>>>>>> 8c6365243f9a4907d065f30047ca3821e94e59fe
