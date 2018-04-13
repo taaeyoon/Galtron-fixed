@@ -432,7 +432,7 @@ def updateSlowtime(setting):
             setting.alienbulletSpeed *= 2
             setting.fleetDropSpeed *= 2
             setting.newItemSlowTime = 0
-            sounds.slow_sound.stop()
+            sounds.slowdown_sound.stop()
 
 def updateSpeedtime(setting):
     if setting.newItemSpeedTime !=0:
