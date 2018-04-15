@@ -62,7 +62,7 @@ def runGame():
     mainGameButtons = ["play", "menu", "quit"]
     aboutButtons = ["menu", "quit"]
     settingsMenuButtons = ["menu", "invert","speed setting","quit"]
-    speedButtons = ["fast","middle","slow"]
+    speedButtons = ["fast","middle","slow","menu"]
     
     bgManager = BackgroundManager(screen)
     bgManager.setFillColor((0, 0, 0))
